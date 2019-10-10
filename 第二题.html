@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue2.6.10.js"></script>
+    <style type="text/css">
+        .d1{border:2px solid ;width:400px;height:200px;font-size: 18px;}
+        .d2{color:black;width:500px;height:40px;}
+        ul{margin:0; padding:0; list-style:none; overflow:hidden;}
+        li{width:100px; float:left; background-color:#2E8B57; height:40px; line-height:40px; text-align:center; cursor:pointer;}
+        li.active{background-color:#548B54;}
+    </style>
+</head>
+<body>
+<div id="xxk">
+    <my-xxk :info="tbinfo1" :cls="tbclass1"></my-xxk>
+    <my-xxk :info="tbinfo2" :cls="tbclass2"></my-xxk>
+</div>
+<script>
+    var MyXxk={
+        template:`
+
+        <div class="d1">
+        <div class="d2">
+          <ul >
+            <li v-for="(item,index) in info" :key="index"  :class="{active:num==index}" @click="getNum(index)" >
+              {{item}}
+            </li>
+          </ul>
+        </div>
+        <div>
+      <div v-for='(childitem,index) in cls' v-show="index == num">{{childitem}}</div>
+    </div>
+  </div>
+
+        `,
+        data(){
+            return{
+                num:0,
+            }
+        },
+        methods : {
+            getNum(index){
+                this.num = index;
+            }
+        },
+        props:['info','cls']
+    }
+    new Vue({
+        el : "#xxk",
+        data : {
+            tbinfo1 : ["选项1","选项2","选项3","选项4"],
+            tbclass1 : ["这是选项1的内容","这是选项2的内容","这是选项3的内容","这是选项4的内容"],
+            tbinfo2: ["京东超市","数码电器","服饰美妆","京东生鲜"],
+            tbclass2: ["时令生鲜","休闲零食","营养保健","粮油调味"]
+
+        },
+        components:{
+            'my-xxk':MyXxk
+        }
+    })
+</script>
+</body>
+</html>

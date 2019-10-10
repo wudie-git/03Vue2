@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue2.6.10.js"></script>
+</head>
+<body>
+<div id="demo5">
+    <demo-button></demo-button>
+</div>
+<script>
+    var DemoButton={
+        template:`
+        <button @click="sendVerify()" :style="bstyle" @mouseover="bmouseover()" @mouseleave="bmouseleave()" :style="bstyle">{{test}}</button>
+        `,
+        data(){
+            return{
+                test:'窝窝头，一块钱四个，嘿嘿',
+                bstyle:'background:white; border:2px solid blue; width:100px;height:35px'
+            }
+
+        },
+        methods:{
+            sendVerify(){
+                alert(this.test)
+            },
+            bmouseover(){
+                this.bstyle = 'background: blue;color: white;border:1px solid blue;width:100px;height:35px;';
+            },
+            bmouseleave(){
+                this.bstyle = 'border:1px solid blue;width:100px;height:35px;'
+            }
+        }
+    }
+    new Vue({
+        el:"#demo5",
+        components:{
+            'demo-button': DemoButton
+        }
+    })
+
+</script>
+</body>
+</html>

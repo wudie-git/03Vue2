@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue2.6.10.js"></script>
+</head>
+<body>
+<div id="cart">
+    <cart-button></cart-button>
+</div>
+<script>
+    var CartButton={
+        template:`
+        <div><button @click="add" :style="bstyle">+</button>
+        <input v-focus type="text"  v-model="count"  v-html="msg" :style="tstyle">
+        <button @click="dec" :style="bstyle">-</button></div>
+        `,
+        data(){
+            return{
+                count:1,
+                bstyle:'width:50px;height:30px;color:white;background:#2E8B57;border:2px solid ;',
+                tstyle:'width:70px;height:20px;border:2px solid ;'
+            }
+        },
+        methods:{
+            add(){
+                this.count++;
+            },
+            dec(){
+                if(this.count>1)
+                    this.count--;
+                else
+                    alert('数量为1，不能再减')
+            }
+        },
+        directives: {
+            focus:function (e) {
+                e.focus();
+            }
+        },
+        computed:{
+            msg(){
+                if(this.count<0){
+                    alert('输入数据不合法');
+                    focus();
+                    this.count=1;
+                }
+            }
+        }
+
+    }
+    new Vue({
+        el:'#cart',
+        components:{
+            'cart-button':CartButton
+        }
+
+    })
+</script>
+</body>
+</html>
